@@ -26,24 +26,24 @@ def count_chars(str):
     return characters
 
 
-def convert_to_list(dict):
+def convert_to_sorted_list(dict):
     lst = []
-    for char in dict:
-        lst.append({char: dict[char]})
-    lst.sort(key=lambda item: list(item.values())[0], reverse=True)
+    for c in dict:
+        lst.append({"char": c, "count": dict[c]})
+    lst.sort(key=lambda item: item["count"], reverse=True)
     return lst
 
 
 def print_report(word_count, char_dict):
-    list_of_chars = convert_to_list(char_dict)
+    list_of_chars = convert_to_sorted_list(char_dict)
 
     print(f"╔═════════ Start report ═════════")
     print(f"║ Book contains {word_count} words\n║")
+
     for item in list_of_chars:
-        char = list(item.keys())[0]
-        count = list(item.values())[0]
-        if char.isalpha():
-            print(f"║  {char} is {count}")
+        if item["char"].isalpha():
+            print(f"║  {item["char"]} is {item["count"]}")
+
     print(f"╚══════════ End report ══════════")
 
 
